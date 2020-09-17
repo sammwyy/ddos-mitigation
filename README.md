@@ -79,12 +79,6 @@ Drop invalid packets with invalid or unknown status.
 iptables -t mangle -A PREROUTING -m conntrack --ctstate INVALID -j DROP
 ```
 
-#### Drop TCP packets that are new and are not SYN
-Drop new non-SYN packets
-```
-iptables -t mangle -A PREROUTING -p tcp ! --syn -m conntrack --ctstate NEW -j DROP
-```
-
 #### Block packets with bogus TCP flags
 ```
 iptables -t mangle -A PREROUTING -p tcp --tcp-flags FIN,SYN,RST,PSH,ACK,URG NONE -j DROP

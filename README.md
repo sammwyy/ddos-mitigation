@@ -1,6 +1,15 @@
 # DDoS Mitigation
 
 ## Index
+- [Kernel](#kernel-modifications)
+  - [Drop ICMP Echo Requests](#Drop-ICMP-ECHO-Requests)
+  - [Dont accept ICMP Redirect](#Dont-accept-ICMP-Redirect)
+  - [Drop source routed packets](#Drop-source-routed-packets)
+  - [Enable SYN-Cookie for prevent SYN Flood](#Enable-SYN-Cookie-for-prevent-SYN-Flood)
+  - [Increase TCP SYN backlog](#Increase-TCP-SYN-backlog)
+  - [Decrease TCP SYN-ACK retries](#Decrease-TCP-SYN-ACK-retries)
+  - [Enable Address Spoofing Protection](#Enable-Address-Spoofing-Protection)
+  - [Disable SYN Packet tracking]("Disable-SYN-Packet-tracking)
 - [IPTables](#iptables)
   - [Drop Invalid Packets](#drop-invalid-packets)
   - [Drop TCP packets that are new and are not SYN](#drop-tcp-packets-that-are-new-and-are-not-sync)

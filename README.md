@@ -78,7 +78,7 @@ sysctl -w net/netfilter/nf_conntrack_tcp_loose=0
 #### Drop Invalid Packets
 Drop invalid packets with invalid or unknown status.
 ```
-iptables -t mangle -A PREROUTING -m conntrack --ctstate INVALID -j DROP
+iptables -A INPUT -m state --state INVALID -j DROP
 ```
 
 #### Block packets with bogus TCP flags

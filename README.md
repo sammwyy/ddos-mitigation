@@ -125,7 +125,7 @@ iptables -A INPUT -p tcp --tcp-flags RST RST -j DROP
 ```
 iptables -t raw -A PREROUTING -p tcp -m tcp --syn -j CT --notrack
 iptables -A INPUT -p tcp -m tcp -m conntrack --ctstate INVALID,UNTRACKED -j SYNPROXY --sack-perm --timestamp --wscale 7 --mss 1460
-iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
+iptables -A INPUT -m state --state INVALID -j DROP
 ```
 
 #### Prevent SSH Bruteforce

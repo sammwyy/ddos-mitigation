@@ -1,5 +1,9 @@
 # DDoS Mitigation
 
+## Files
+**Zeroline** This script automatically and safely installs all the iptables rules and kernel modifications that are in this repository instantly.  
+[Download v1.0](https://github.com/sammwyy/ddos-mitigation/blob/master/scripts/zeroline.sh)
+
 ## Index
 - [Kernel](#kernel-modifications)
   - [Drop ICMP Echo Requests](#Drop-ICMP-ECHO-Requests)

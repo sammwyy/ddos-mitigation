@@ -12,13 +12,11 @@
   - [Disable SYN Packet tracking]("Disable-SYN-Packet-tracking)
 - [IPTables](#iptables)
   - [Drop Invalid Packets](#drop-invalid-packets)
-  - [Drop TCP packets that are new and are not SYN](#drop-tcp-packets-that-are-new-and-are-not-sync)
   - [Block packets with bogus TCP flags](#block-packets-with-bogus-tcp-flags)
   - [Drop ICMP](#drop-icmp)
   - [Drop Fragments in all Chains](#Drop-Fragments-in-all-Chains)
   - [Limit connections per IP](#Limit-connections-per-IP)
   - [Limit RST Packets](#Limit-RST-packets)
-  - [Limit new TCP Connections per seconds per IP](#Limit-new-TCP-Connections-per-seconds-per-IP)
   - [Use of SYN-PROXY](#use-of-syn-proxy)
   - [Prevent SSH Bruteforce](#Prevent-SSH-Bruteforce)
   - [Prevent Port Scanner](#prevent-port-scanner)
@@ -117,12 +115,6 @@ iptables -A INPUT -p tcp -m connlimit --connlimit-above 111 -j REJECT --reject-w
 ```
 iptables -A INPUT -p tcp --tcp-flags RST RST -m limit --limit 2/s --limit-burst 2 -j ACCEPT
 iptables -A INPUT -p tcp --tcp-flags RST RST -j DROP
-```
-
-#### Limit new TCP Connections per seconds per IP
-```
-iptables -A INPUT -p tcp -m conntrack --ctstate NEW -m limit --limit 60/s --limit-burst 20 -j ACCEPT
-iptables -A INPUT -p tcp -m conntrack --ctstate NEW -j DROP
 ```
 
 #### Use of SYN-PROXY

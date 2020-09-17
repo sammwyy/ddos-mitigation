@@ -46,9 +46,9 @@ disable_syn_packet_track () {
 }
 
 drop_invalid_packets () {
-    echo "Installing invalid packets drop"
-    iptables -t mangle -A PREROUTING -m conntrack --ctstate INVALID -j DROP
-    echo "** IPTables: Setting rule: -t mangle -A PREROUTING -m conntrack --ctstate INVALID -> DROP"
+    echo "Installing invalid packet drop"
+    iptables -A INPUT -m state --state INVALID -j DROP
+    echo "** IPTables: Setting rule: -A INPUT -m state INVALID -j DROP"
 }
 
 bogus_tcp_flags () {
@@ -115,8 +115,8 @@ syn_proxy () {
     echo "** IPTables: Setting rule: raw -A PREROUTING -p tcp -m tcp --syn --notrack -> CT"
     iptables -A INPUT -p tcp -m tcp -m conntrack --ctstate INVALID,UNTRACKED -j SYNPROXY --sack-perm --timestamp --wscale 7 --mss 1460
     echo "** IPTables: Setting rule: TCP -m conntrack --ctstate INVALID,UNTRACKET -j SYNPROXY 1460"
-    iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
-    echo "** IPTables: Setting rule: -A INPUT -m conntrack --ctstate INVALID -j DROP"
+    iptables -A INPUT -m state --state INVALID -j DROP
+    echo "** IPTables: Setting rule: -A INPUT -m state INVALID -j DROP"
 }
 
 prevent_ssh_bf () {

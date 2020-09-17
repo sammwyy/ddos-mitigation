@@ -14,12 +14,64 @@
   - [Prevent SSH Bruteforce](#Prevent-SSH-Bruteforce)
   - [Prevent Port Scanner](#prevent-port-scanner)
   
+## Kernel Modifications
+### Drop ICMP ECHO-Requests
+To prevent smurf attack.
+```
+echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
+```
+
+### Dont accept ICMP Redirect
+To prevent smurf attack.
+```
+echo 0 > /proc/sys/net/ipv4/conf/all/accept_redirects
+```
+
+### Drop source routed packets
+```
+echo 0 > /proc/sys/net/ipv4/conf/all/accept_source_route
+```
+
+### Enable SYN-Cookie for prevent SYN Flood
+To prevent SYN Flood and TCP Starvation.
+```
+sysctl -w net/ipv4/tcp_syncookies=1
+sysctl -w net/ipv4/tcp_timestamps=1
+```
+
+### Increase TCP SYN backlog
+To prevent TCP Starvation.
+```
+echo 2048 > /proc/sys/net/ipv4/tcp_max_syn_backlog
+```
+
+### Decrease TCP SYN-ACK retries
+To prevent TCP Starvation.
+```
+echo 3 > /proc/sys/net/ipv4/tcp_synack_retries
+```
+
+### Enable Address Spoofing Protection
+To prevent IP Spoof.
+```
+echo 1 > /proc/sys/net/ipv4/conf/all/rp_filter
+```
+
+### Disable SYN Packet tracking
+To prevent the system from using resources tracking SYN Packets.
+```
+sysctl -w net/netfilter/nf_conntrack_tcp_loose=0
+```
+
+## IPTables
 ### Drop Invalid Packets
+Drop invalid packets with invalid or unknown status.
 ```
 iptables -t mangle -A PREROUTING -m conntrack --ctstate INVALID -j DROP
 ```
 
 ### Drop TCP packets that are new and are not SYN
+Drop new non-SYN packets
 ```
 iptables -t mangle -A PREROUTING -p tcp ! --syn -m conntrack --ctstate NEW -j DROP
 ```
@@ -43,6 +95,7 @@ iptables -t mangle -A PREROUTING -p tcp --tcp-flags ALL SYN,RST,ACK,FIN,URG -j D
 ```
 
 ### Drop ICMP
+To prevent Smurf Attack.
 ```
 iptables -t mangle -A PREROUTING -p icmp -j DROP
 ```
@@ -88,3 +141,6 @@ iptables -N port-scanning
 iptables -A port-scanning -p tcp --tcp-flags SYN,ACK,FIN,RST RST -m limit --limit 1/s --limit-burst 2 -j RETURN
 iptables -A port-scanning -j DROP
 ```
+
+## Sources
+- [hackplayers.com](https://www.hackplayers.com/2016/04/proteccion-ddos-mediante-iptables.html)

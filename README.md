@@ -4,6 +4,9 @@
 **Zeroline** This script automatically and safely installs all the iptables rules and kernel modifications that are in this repository instantly.  
 [Download v1.0](https://github.com/sammwyy/ddos-mitigation/blob/master/scripts/zeroline.sh)
 
+## Disclaimer
+Some rules may interfere with the functioning of the tools and tips in this repository. Make sure you have an emergency method to disable the Firewall or revert the changes made with this repository in case you lose access to the server.  
+
 ## Index
 - [Kernel](#kernel-modifications)
   - [Drop ICMP Echo Requests](#Drop-ICMP-ECHO-Requests)
@@ -24,6 +27,7 @@
   - [Use of SYN-PROXY](#use-of-syn-proxy)
   - [Prevent SSH Bruteforce](#Prevent-SSH-Bruteforce)
   - [Prevent Port Scanner](#prevent-port-scanner)
+ 
   
 ## Kernel Modifications
 #### Drop ICMP ECHO-Requests

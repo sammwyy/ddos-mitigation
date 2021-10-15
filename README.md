@@ -116,7 +116,7 @@ iptables -t mangle -A PREROUTING -f -j DROP
 
 #### Limit connections per IP
 ```
-iptables -A INPUT -p tcp -m connlimit --connlimit-above 111 -j REJECT --reject-with tcp-reset
+iptables -A INPUT -p tcp -m connlimit --connlimit-above 18 -j REJECT --reject-with tcp-reset
 ```
 
 #### Limit RST Packets

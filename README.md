@@ -1,4 +1,4 @@
-# DDoS Mitigation
+# DDoS Mitigation (Pending Re-Work)
 
 ## Files
 **Zeroline** This script automatically and safely installs all the iptables rules and kernel modifications that are in this repository instantly.  

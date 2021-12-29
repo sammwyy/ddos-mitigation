@@ -4,6 +4,8 @@
 **Zeroline** This script automatically and safely installs all the iptables rules and kernel modifications that are in this repository instantly.  
 [Download v1.0](https://github.com/sammwyy/ddos-mitigation/blob/master/scripts/zeroline.sh)
 
+**DEPRECATED** Use [Kernel Tweaks](https://github.com/nfense/kernel-tweaks) instead.
+
 ## Disclaimer
 Some rules may interfere with the functioning of the tools and tips in this repository. Make sure you have an emergency method to disable the Firewall or revert the changes made with this repository in case you lose access to the server.  
 
